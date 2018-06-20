@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import { LoadingBar } from 'react-redux-loading';
+import LoadingBar from 'react-redux-loading';
 import _ from 'lodash';
 
 import {handleInitialUsers} from '../actions/users'
