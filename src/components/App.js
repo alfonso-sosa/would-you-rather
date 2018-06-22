@@ -6,6 +6,7 @@ import _ from 'lodash';
 import Users from './Users'
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
+import Questions from './Questions';
 
 
 
@@ -22,7 +23,10 @@ class App extends Component {
           {
             this.props.loading === true
             ? null
-            : <Route path='/' exact component={Users} />
+            : <div> 
+                <Route path='/' exact component={Users} />
+                <Route path='/questions' component={Questions} />
+              </div>
           }
         </Fragment>
       </Router>

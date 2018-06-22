@@ -1,25 +1,23 @@
 import React, { Component, Fragment } from 'react'
 import { Grid, Row, Col, Label } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import User from './User';
+import Question from './Question';
 
 
-class Users extends Component {
+class Questions extends Component {
   render() {
-    const { users } = this.props;
+    const { questions } = this.props;
     return (
       <Fragment>
         <br />
         <Grid>
-          <h2><Label bsStyle="info">Select a user</Label></h2>
-          <br/>
           {
-            Object.keys(users).map((key) => {
-              const user = users[key];
+            Object.keys(questions).map((key) => {
+              const question = questions[key];
               return (
-                <Row key={user.id}>
+                <Row key={question.id}>
                   <Col md={5}>
-                    <User user={user}/>
+                    <Question question={question}/>
                   </Col>
                 </Row>
               )
@@ -32,10 +30,10 @@ class Users extends Component {
   }
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ questions }) {
   return {
-    users
+    questions
   }
 }
 
-export default connect(mapStateToProps)(Users)
+export default connect(mapStateToProps)(Questions)
