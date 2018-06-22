@@ -3,15 +3,15 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 import LoadingBar from 'react-redux-loading';
 import _ from 'lodash';
 
-import {handleInitialUsers} from '../actions/users'
 import Users from './Users'
 import { connect } from 'react-redux';
+import { handleInitialData } from '../actions/shared';
 
 
 
 class App extends Component {
   componentDidMount(){
-    this.props.dispatch(handleInitialUsers())
+    this.props.dispatch(handleInitialData())
   }
 
   render() {
