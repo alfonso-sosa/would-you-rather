@@ -8,7 +8,7 @@ class User extends React.Component {
     handleLogin = (e) => {
       e.preventDefault();
       const { user, dispatch } = this.props;
-      dispatch(setAuthedUser(user.id))
+      dispatch(setAuthedUser(user))
       this.props.history.push('/questions')
     }
 
@@ -21,7 +21,7 @@ class User extends React.Component {
         </Panel.Heading> */}
           <Grid>
             <Row>
-              <Col md={1} style={{ padding: "1em" }}>
+              <Col xs={2} md={1} style={{ padding: "1em" }}>
                 <Image src={user.avatarURL} circle responsive />
               </Col>
               <Col md={6}>

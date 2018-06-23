@@ -1,19 +1,18 @@
 import React from 'react';
-import { Grid, Row, Col, Panel, Image } from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class Question extends React.Component {
   
   render() {
     const { question } = this.props;
-    console.log(question);
     return (
-      <Panel className="user-panel">
-        
+      <Panel>        
         <Panel.Body>
-          <h3>{question.optionOne.text}</h3>
+          <h4>{`${question.optionOne.text}?`}
           <br/>
-          <h3>{question.optionTwo.text}</h3>
+          <br/>
+          {`${question.optionTwo.text}?`}</h4>
         </Panel.Body>
         
       </Panel>

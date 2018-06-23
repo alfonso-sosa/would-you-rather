@@ -6,7 +6,7 @@ import _ from 'lodash';
 import Users from './Users'
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
-import Questions from './Questions';
+import QuestionsPage from './QuestionsPage';
 
 
 
@@ -25,7 +25,7 @@ class App extends Component {
             ? null
             : <div> 
                 <Route path='/' exact component={Users} />
-                <Route path='/questions' component={Questions} />
+                <Route path='/questions' component={QuestionsPage} />
               </div>
           }
         </Fragment>
