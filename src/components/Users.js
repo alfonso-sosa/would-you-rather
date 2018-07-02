@@ -18,7 +18,7 @@ class Users extends Component {
               const user = users[key];
               return (
                 <Row key={user.id}>
-                  <Col md={5}>
+                  <Col xs={6} md={5}>
                     <User user={user}/>
                   </Col>
                 </Row>

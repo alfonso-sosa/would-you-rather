@@ -1,7 +1,9 @@
+import _ from 'lodash';
 import React, { Component, Fragment } from 'react';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import { Col, Grid, Nav, Navbar, NavItem, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import QuestionList from './QuestionList';
+import User from './User';
 
 class QuestionsPage extends Component {
   state = {
@@ -12,9 +14,16 @@ class QuestionsPage extends Component {
     this.setState(() => ({ answered: key === 2 }));
   }
 
+  componentWillMount(){
+    const {authedUser} = this.props;
+    if (_.isNull(authedUser)){
+      this.props.history.push('/')
+    }
+  }
+
   render() {
     const {answered } = this.state;
-    const { questions } = this.props;
+    const { questions, authedUser } = this.props;
     return (
       <Fragment>
         <Navbar onSelect={this.handleFilterQuestions}>
@@ -32,14 +41,24 @@ class QuestionsPage extends Component {
             </NavItem>
           </Nav>
         </Navbar>
-        <QuestionList questions={questions} answered={answered} />
+        <Grid>
+          <Row>
+            <Col md={5} className="pull-left">
+              <QuestionList questions={questions} answered={answered} />
+            </Col>
+            <Col md={5} className="pull-right">
+              <User user={authedUser}/>
+            </Col>
+          </Row>
+        </Grid>
+        
       </Fragment>
     )
   }
 }
 
-function mapStateToProps({ questions }) {
-  return { questions }
+function mapStateToProps({ questions, authedUser }) {
+  return { questions, authedUser }
 }
 
 export default connect(mapStateToProps)(QuestionsPage)
