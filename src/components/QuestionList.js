@@ -14,8 +14,7 @@ class QuestionList extends Component {
           <h4>Would you rather...</h4>
           <br />
           {
-            Object.keys(questions).map((key) => {
-              const question = questions[key];
+            questions.map(question => {
               return (
                 <Row key={question.id}>
                   <Col md={5}>
@@ -33,21 +32,22 @@ class QuestionList extends Component {
 }
 
 function mapStateToProps({ authedUser }, { questions, answered }) {
-  return {
-    questions:
-      answered ?
-        Object.values(questions).filter(
-          question => (
-            _.includes(
-              Object.keys(authedUser.answers),
-              question.id)))
-        :
-        Object.values(questions).filter(
-          question => (
-            !_.includes(
-              Object.keys(authedUser.answers),
-              question.id)))
+  const filtered =
+    answered ?
+      Object.values(questions).filter(
+        question => (
+          _.includes(
+            Object.keys(authedUser.answers),
+            question.id)))
+      :
+      Object.values(questions).filter(
+        question => (
+          !_.includes(
+            Object.keys(authedUser.answers),
+            question.id)))
 
+  return {
+    questions: filtered.sort((q1, q2) => (q2.timestamp - q1.timestamp))
   }
 }
 
