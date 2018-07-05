@@ -1,13 +1,26 @@
 import React, {Component, Fragment} from 'react'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
 import LoadingBar from 'react-redux-loading';
+import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 
 import Users from './Users'
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
 import QuestionsPage from './QuestionsPage';
+import Poll from './Poll';
 
+// from https://stackoverflow.com/questions/43164554/how-to-implement-authenticated-routes-in-react-router-4
+function PrivateRoute ({component: Component, authed, ...rest}) {
+  return (
+    <Route
+      {...rest}
+      render={(props) => authed === true
+        ? <Component {...props} />
+        : <Redirect to={{pathname: '/', state: {from: props.location}}} />}
+    />
+  )
+}
 
 
 class App extends Component {
@@ -16,6 +29,7 @@ class App extends Component {
   }
 
   render() {
+    const { authedUser } = this.props
     return (
       <Router>
         <Fragment>
@@ -25,7 +39,8 @@ class App extends Component {
             ? null
             : <div> 
                 <Route path='/' exact component={Users} />
-                <Route path='/questions' component={QuestionsPage} />
+                <PrivateRoute authed={!_.isNull(authedUser)} path='/questions' exact component={QuestionsPage} />
+                <PrivateRoute authed={!_.isNull(authedUser)} path='/questions/:id' exact component={Poll} />                
               </div>
           }
         </Fragment>
@@ -34,9 +49,10 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({users}) {
+function mapStateToProps({users, authedUser}) {
   return {
-    loading: _.isEmpty(users)
+    loading: _.isEmpty(users),
+    authedUser
   }
 }
 

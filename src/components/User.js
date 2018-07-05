@@ -12,8 +12,6 @@ class User extends React.Component {
     return !_.isEmpty(authedUser) && authedUser.id === user.id;
   }
 
-
-
   handleClick = (e) => {
     e.preventDefault();
     const { user, dispatch } = this.props;

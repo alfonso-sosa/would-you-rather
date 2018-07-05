@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { Col, Grid, Nav, Navbar, NavItem, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -12,13 +11,6 @@ class QuestionsPage extends Component {
 
   handleFilterQuestions = (key, event) => {
     this.setState(() => ({ answered: key === 2 }));
-  }
-
-  componentWillMount(){
-    const {authedUser} = this.props;
-    if (_.isNull(authedUser)){
-      this.props.history.push('/')
-    }
   }
 
   render() {
