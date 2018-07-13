@@ -8,7 +8,7 @@ import Users from './Users'
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
 import QuestionsPage from './QuestionsPage';
-import Poll from './Poll';
+import Answer from './Answer';
 
 // from https://stackoverflow.com/questions/43164554/how-to-implement-authenticated-routes-in-react-router-4
 function PrivateRoute ({component: Component, authed, ...rest}) {
@@ -40,7 +40,7 @@ class App extends Component {
             : <div> 
                 <Route path='/' exact component={Users} />
                 <PrivateRoute authed={!_.isNull(authedUser)} path='/questions' exact component={QuestionsPage} />
-                <PrivateRoute authed={!_.isNull(authedUser)} path='/questions/:id' exact component={Poll} />                
+                <PrivateRoute authed={!_.isNull(authedUser)} path='/questions/:id' exact component={Answer} />                
               </div>
           }
         </Fragment>
